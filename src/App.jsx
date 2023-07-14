@@ -24,7 +24,7 @@ import Baking from './pages/Baking';
 import Tailoring from './pages/Tailoring';
 import HairStyling from './pages/HairStyling';
 import Capentry from './pages/Capentry';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 const App = () => {
 
@@ -40,10 +40,15 @@ const App = () => {
     })
   }, []);
 
+  const signOut = () => {
+    signOut(auth).then(() => {
+    console.log('success')
+    }).catch((err) => console.log(err))
+  }
   return (
     <Router>
       <div className='container-full'>
-        <Header />
+        <Header authUser={authUser} signOut={signOut} />
 
         <section className="main-body container-fluid px-5 py-4">
           <Routes>

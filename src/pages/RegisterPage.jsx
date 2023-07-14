@@ -22,13 +22,18 @@ const Register = () => {
     
 const signup = (e) => {
     e.preventDefault()
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        console.log(userCredential);
-        navigate('/login')
-    }).catch((error ) => {
-        setErrmsg(error.message);
-    })
+    if(password === confirm) {
+
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            console.log(userCredential);
+            navigate('/login')
+        }).catch((error ) => {
+            setErrmsg(error.message);
+        })
+    }else{
+        setErrmsg("Password and Comfirm pass word must match")
+    }
 
 }
 
@@ -80,7 +85,7 @@ const signup = (e) => {
                         <div className="row mb-3">
                             <label for="phone" className="col-sm-2 col-form-label">Telephone</label>
                             <div className="col-sm-10">
-                                <input type="tel" className="form-control" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)}  />
+                                <input type="tel" className="form-control" id="phone" />
                             </div>
                         </div>
                     </fieldset>
@@ -98,7 +103,7 @@ const signup = (e) => {
                         <div className="row mb-3">
                             <label for="password2" className="col-sm-2 col-form-label" >Confirm Password</label>
                             <div className="col-sm-10">
-                                <input type="password" className="form-control" id="password2" />
+                                <input type="password" className="form-control" id="password2"  value={confirm} onChange={(e) => setConfirm(e.target.value)} />
                             </div>
                         </div>
                     </fieldset>
