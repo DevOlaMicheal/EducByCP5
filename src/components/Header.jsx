@@ -6,8 +6,15 @@ import { signOut } from 'firebase/auth';
 
 
 
-const Header = ({ authUser, userSignOut }) => {
+const Header = ({ authUser, setauthUser }) => {
 
+    const Navigate = useNavigate()
+    const userSignOut = () => {
+        signOut(auth).then(() => {
+        setauthUser(null)
+        Navigate('/')
+        }).catch((err) => console.log(err))
+      }
     
   return (
     <header>
@@ -41,7 +48,7 @@ const Header = ({ authUser, userSignOut }) => {
                                 )}
                                 { authUser && (
                                     <span>
-                                        <i className="fa fa-lock"></i> <Link to="/login" onClick={() => userSignOut}>Logout</Link>  | <p>{authUser.email}</p>
+                                        <i className="fa fa-lock"></i> <a onClick={() => userSignOut}>Logout</a>  | <p>{authUser.email}</p>
                                     </span>
                                 )}
                                 

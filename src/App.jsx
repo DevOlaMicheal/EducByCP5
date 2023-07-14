@@ -39,17 +39,12 @@ const App = () => {
       }
     })
   }, []);
-  const userSignOut = () => {
-    signOut(auth).then(() => {
-    setauthUser(null)
-    console.log('success')
-    }).catch((err) => console.log(err))
-  }
+ 
   
   return (
     <Router>
       <div className='container-full'>
-        <Header authUser={authUser} userSignOut={userSignOut} />
+        <Header authUser={authUser} setauthUser={setauthUser} />
 
         <section className="main-body container-fluid px-5 py-4">
           <Routes>
