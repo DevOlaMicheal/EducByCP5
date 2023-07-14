@@ -2,9 +2,13 @@ import React from 'react';
 import enGbFlag from '../assets/images/language/en-gb/en-gb.png';
 import { auth } from '../firebase';
 import { Link, useNavigate } from "react-router-dom";
+import { signOut } from 'firebase/auth';
 
 
-const Header = ({ authUser, signOut }) => {
+
+const Header = ({ authUser, userSignOut }) => {
+
+    
   return (
     <header>
         {/* <div classNameName="container-fluid px-5 py-2 nav-box">
@@ -37,8 +41,8 @@ const Header = ({ authUser, signOut }) => {
                                 )}
                                 { authUser && (
                                     <span>
-                                    <i className="fa fa-lock"></i> <Link to="/login" onClick={() => signOut}>Logout</Link>  
-                                </span>
+                                        <i className="fa fa-lock"></i> <Link to="/login" onClick={() => userSignOut}>Logout</Link>  | <p>{authUser.email}</p>
+                                    </span>
                                 )}
                                 
                             </div>

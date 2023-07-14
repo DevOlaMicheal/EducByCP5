@@ -39,21 +39,24 @@ const App = () => {
       }
     })
   }, []);
-
-  const signOut = () => {
+  const userSignOut = () => {
     signOut(auth).then(() => {
+    setauthUser(null)
     console.log('success')
     }).catch((err) => console.log(err))
   }
+  
   return (
     <Router>
       <div className='container-full'>
-        <Header authUser={authUser} signOut={signOut} />
+        <Header authUser={authUser} userSignOut={userSignOut} />
 
         <section className="main-body container-fluid px-5 py-4">
           <Routes>
             
-            <Route path="/" exact element={<HomePage />} />
+            
+            {authUser ? <Route path="/" exact element={<HomePage />} /> : <Route path="/" exact element={<LoginPage />} />}
+            
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/painting" element={<Painting />} />
